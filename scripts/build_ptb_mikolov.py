@@ -11,9 +11,12 @@ def download(ptb_dir):
     else:
         print 'downloading'
         try:
-            subprocess.call(['wget', '-P', ptb_dir, 'https://s3.eu-west-2.amazonaws.com/k-kawakami.com/seg/ptb_mikolov.zip'])
+            subprocess.call(['wget', '-P', ptb_dir, 'https://s3.eu-west-2.amazonaws.com/k-kawakami.com/lm/ptb_mikolov.zip'])
             subprocess.call(['unzip', '{}/ptb_mikolov.zip'.format(ptb_dir), '-d', ptb_dir])
             subprocess.call(['rm', '{}/ptb_mikolov.zip'.format(ptb_dir)])
+            subprocess.call(['mv', '{}/ptb_mikolov/char'.format(args.d), '{}'.format(args.d)])
+            subprocess.call(['mv', '{}/ptb_mikolov/word'.format(args.d), '{}'.format(args.d)])
+            subprocess.call(['rm', '-r', '{}/ptb_mikolov'.format(args.d)])
             return True
         except:
             return False
@@ -41,9 +44,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     success = download(args.d) 
-
-    if success:
-        datasets = [('tr', 'ptb.char.train.txt'), ('va', 'ptb.char.valid.txt'), ('te', 'ptb.char.test.txt')]
-        for dataset, file_name in datasets:
-            sentences = load_data('{}/ptb_mikolov/{}'.format(args.d, file_name))
-            write_file('{}/{}.txt'.format(args.d, dataset), sentences)

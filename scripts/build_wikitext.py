@@ -11,6 +11,13 @@ def download(target_dir):
     else:
         print 'downloading'
         try:
+            subprocess.call(['wget', '-P', target_dir, 'https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-v1.zip'])
+            subprocess.call(['unzip', '{}/wikitext-2-v1.zip'.format(target_dir), '-d', target_dir])
+            subprocess.call(['rm', '{}/wikitext-2-v1.zip'.format(target_dir)])
+            subprocess.call(['wget', '-P', target_dir, 'https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-103-v1.zip'])
+            subprocess.call(['unzip', '{}/wikitext-103-v1.zip'.format(target_dir), '-d', target_dir])
+            subprocess.call(['rm', '{}/wikitext-103-v1.zip'.format(target_dir)])
+
             subprocess.call(['wget', '-P', target_dir, 'https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-raw-v1.zip'])
             subprocess.call(['unzip', '{}/wikitext-2-raw-v1.zip'.format(target_dir), '-d', target_dir])
             subprocess.call(['rm', '{}/wikitext-2-raw-v1.zip'.format(target_dir)])

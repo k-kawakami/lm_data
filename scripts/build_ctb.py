@@ -11,7 +11,7 @@ def download(ctb_dir):
     else:
         print 'downloading'
         try:
-            subprocess.call(['wget', '-P', ctb_dir, 'https://s3.eu-west-2.amazonaws.com/k-kawakami.com/seg/ctb.zip'])
+            subprocess.call(['wget', '-P', ctb_dir, 'https://s3.eu-west-2.amazonaws.com/k-kawakami.com/lm/ctb.zip'])
             subprocess.call(['unzip', '{}/ctb.zip'.format(ctb_dir), '-d', ctb_dir])
             subprocess.call(['rm', '{}/ctb.zip'.format(ctb_dir)])
             return True
