@@ -40,7 +40,7 @@ def remove_oov_sentences(file_name, vocab):
     return sentences
 
 def write_file(file_name, sentences):
-    f = codecs.open(file_name, 'w', 'utf_8_sig')
+    f = codecs.open(file_name, 'w', 'utf8')
     for sentence in sentences:
         f.write(sentence)
     f.close()
